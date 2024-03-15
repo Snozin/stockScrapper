@@ -111,14 +111,12 @@ app.post('/scrap', async (req, res) => {
       result.per = await page
         .locator('[data-test="PE_RATIO-value"]')
         .innerText()
-
+      result.id = ticker
       data.push(result)
     }
 
     await browser.close()
-    res.status(200).json({
-      data,
-    })
+    res.status(200).json(data)
   } catch (err) {
     res.status(500).json({
       errorName: err.name,
